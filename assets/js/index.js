@@ -10,7 +10,7 @@ const mouse = {
 };
 
 const dots = [];
-const numDots = 120;
+const numDots = 70;
 const dotRadius = 3;
 
 for (let i = 0; i < numDots; i++) {
@@ -71,7 +71,7 @@ function drawLines() {
             ctx.beginPath();
             ctx.moveTo(dot.x, dot.y);
             ctx.lineTo(connection.dot.x, connection.dot.y);
-            const opacity = 1 - connection.distance / maxDistance;
+            const opacity = 1 - Math.pow(connection.distance / maxDistance, 2); // Smoother fade-in effect
             ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.stroke();
             ctx.closePath();
