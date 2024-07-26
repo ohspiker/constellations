@@ -9,8 +9,10 @@ const mouse = {
     y: canvas.height / 2
 };
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 const dots = [];
-const numDots = 70;
+const numDots = isMobile ? 30 : 70;  // Fewer dots on mobile
 const dotRadius = 3;
 
 for (let i = 0; i < numDots; i++) {
@@ -90,6 +92,13 @@ function animate() {
 canvas.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    mouse.x = touch.clientX;
+    mouse.y = touch.clientY;
+    e.preventDefault();  // Prevent scrolling
 });
 
 window.addEventListener('resize', () => {
